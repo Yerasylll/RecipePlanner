@@ -1,13 +1,14 @@
+import Foundation
 import CoreData
 
 class CoreDataStack {
     static let shared = CoreDataStack()
     
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "RecipeModel")
-        container.loadPersistentStores { _, error in
-            if let error = error {
-                fatalError("Core Data error: \(error)")
+        let container = NSPersistentContainer(name: "RecipeModel") // Must match filename
+        container.loadPersistentStores { storeDescription, error in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         }
         return container
@@ -19,7 +20,13 @@ class CoreDataStack {
     
     func save() {
         if context.hasChanges {
-            try? context.save()
+            do {
+                try context.save()
+            } catch {
+                let nsError = error as NSError
+                print("Core Data save error: \(nsError), \(nsError.userInfo)")
+            }
         }
     }
 }
+

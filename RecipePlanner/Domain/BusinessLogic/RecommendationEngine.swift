@@ -48,11 +48,4 @@ class RecommendationEngine {
             .prefix(maxResults)
             .map { $0.recipe }
     }
-}//
-//  RecommendationEngine.swift
-//  RecipePlanner
-//
-//  Created by Назерке on 10.02.2026.
-//
-
-import Foundation
+}

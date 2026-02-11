@@ -3,6 +3,7 @@ import SwiftUI
 struct ProfileView: View {
     @StateObject private var viewModel = ProfileViewModel()
     @State private var showingMealPlans = false
+    @State private var showingEditProfile = false
     
     var body: some View {
         NavigationView {
@@ -25,6 +26,12 @@ struct ProfileView: View {
                             }
                         }
                         .padding(.vertical, 8)
+                        
+                        Button {
+                            showingEditProfile = true
+                        } label: {
+                            Label("Edit Profile", systemImage: "pencil")
+                        }
                     }
                 }
                 
@@ -48,6 +55,9 @@ struct ProfileView: View {
             .navigationTitle("Profile")
             .sheet(isPresented: $showingMealPlans) {
                 MealPlanView()
+            }
+            .sheet(isPresented: $showingEditProfile) {
+                EditProfileView()
             }
         }
     }

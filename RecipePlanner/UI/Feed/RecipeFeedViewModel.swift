@@ -8,6 +8,7 @@ class RecipeFeedViewModel: ObservableObject {
     @Published var isLoadingMore = false
     @Published var errorMessage: String?
     @Published var searchQuery = ""
+    @Published var recentRecipes: [RecentRecipe] = []
     
     private let repository: RecipeRepository
     private var searchTask: Task<Void, Never>?
@@ -86,6 +87,17 @@ class RecipeFeedViewModel: ObservableObject {
     
     func refresh() async {
         await searchRecipes(query: searchQuery, reset: true)
+    }
+    
+    func loadRecentRecipes() async {
+        guard let userId = FirebaseAuthService.shared.currentUserId else { return }
+        
+        do {
+            let firebaseService = AppContainer.shared.firebaseRealtimeService
+            recentRecipes = try await firebaseService.getRecentlyViewed(userId: userId, limit: 10)
+        } catch {
+            print("Error loading recent recipes: \(error)")
+        }
     }
 }
 

@@ -17,7 +17,7 @@ class FirebaseAuthService: ObservableObject {
     }
     
     var currentUsername: String? {
-        userProfile?.username
+        userProfile?.username ?? Auth.auth().currentUser?.displayName ?? "User"
     }
     
     private init() {
@@ -47,6 +47,9 @@ class FirebaseAuthService: ObservableObject {
             self.currentUser = result.user
             self.isAuthenticated = true
         }
+        
+        // Load profile immediately after sign in
+        await loadUserProfile(userId: result.user.uid)
     }
     
     // MARK: - Sign Up
@@ -91,7 +94,7 @@ class FirebaseAuthService: ObservableObject {
         try await ref.setValue(data)
     }
     
-    private func loadUserProfile(userId: String) async {
+    func loadUserProfile(userId: String) async {
         let ref = Database.database().reference().child("users").child(userId)
         
         do {
@@ -99,8 +102,9 @@ class FirebaseAuthService: ObservableObject {
             
             if let data = snapshot.value as? [String: Any],
                let username = data["username"] as? String,
-               let email = data["email"] as? String,
-               let timestamp = data["createdAt"] as? Double {
+               let email = data["email"] as? String {
+                
+                let timestamp = data["createdAt"] as? Double ?? Date().timeIntervalSince1970
                 
                 let profile = UserProfile(
                     id: userId,
@@ -112,10 +116,48 @@ class FirebaseAuthService: ObservableObject {
                 await MainActor.run {
                     self.userProfile = profile
                 }
+                
+                print("User profile loaded: \(username)")
             }
         } catch {
             print("Error loading user profile: \(error)")
         }
+    }
+    
+    // MARK: - Update Profile
+    func updateUsername(_ newUsername: String) async throws {
+        guard let userId = currentUserId else {
+            throw NSError(domain: "Auth", code: -1, userInfo: [NSLocalizedDescriptionKey: "Not logged in"])
+        }
+        
+        let ref = Database.database().reference().child("users").child(userId)
+        try await ref.updateChildValues(["username": newUsername])
+        
+        // Update local profile
+        if let profile = userProfile {
+            await MainActor.run {
+                self.userProfile = UserProfile(
+                    id: profile.id,
+                    username: newUsername,
+                    email: profile.email,
+                    createdAt: profile.createdAt
+                )
+            }
+        }
+    }
+    
+    func updatePassword(currentPassword: String, newPassword: String) async throws {
+        guard let user = Auth.auth().currentUser,
+              let email = user.email else {
+            throw NSError(domain: "Auth", code: -1, userInfo: [NSLocalizedDescriptionKey: "Not logged in"])
+        }
+        
+        // Re-authenticate first (required by Firebase)
+        let credential = EmailAuthProvider.credential(withEmail: email, password: currentPassword)
+        try await user.reauthenticate(with: credential)
+        
+        // Update password
+        try await user.updatePassword(to: newPassword)
     }
     
     deinit {

@@ -1,0 +1,7 @@
+// Release Configuration
+#include "Secrets.xcconfig"
+
+// Release specific settings
+SWIFT_OPTIMIZATION_LEVEL = -O
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+SWIFT_COMPILATION_MODE = wholemodule

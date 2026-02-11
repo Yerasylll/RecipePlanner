@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E1C138F92F3BCD0A00731225 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E1C138F82F3BCD0A00731225 /* FirebaseAnalytics */; };
+		E1C138FB2F3BCD0A00731225 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E1C138FA2F3BCD0A00731225 /* FirebaseAuth */; };
+		E1C138FD2F3BCD0A00731225 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = E1C138FC2F3BCD0A00731225 /* FirebaseDatabase */; };
+		E1C139002F3BCD4900731225 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E1C138FF2F3BCD4900731225 /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		E1C138462F3BAB1600731225 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -29,9 +36,22 @@
 		E1C1384F2F3BAB1600731225 /* RecipePlannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipePlannerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E1C139072F3BD04900731225 /* Exceptions for "RecipePlanner" folder in "RecipePlanner" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E1C138372F3BAB1300731225 /* RecipePlanner */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E1C1383A2F3BAB1300731225 /* RecipePlanner */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E1C139072F3BD04900731225 /* Exceptions for "RecipePlanner" folder in "RecipePlanner" target */,
+			);
 			path = RecipePlanner;
 			sourceTree = "<group>";
 		};
@@ -45,6 +65,11 @@
 			path = RecipePlannerUITests;
 			sourceTree = "<group>";
 		};
+		E1C138EB2F3BCAAE00731225 /* Config */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Config;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +77,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1C139002F3BCD4900731225 /* Kingfisher in Frameworks */,
+				E1C138FD2F3BCD0A00731225 /* FirebaseDatabase in Frameworks */,
+				E1C138F92F3BCD0A00731225 /* FirebaseAnalytics in Frameworks */,
+				E1C138FB2F3BCD0A00731225 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +104,7 @@
 		E1C1382F2F3BAB1300731225 = {
 			isa = PBXGroup;
 			children = (
+				E1C138EB2F3BCAAE00731225 /* Config */,
 				E1C1383A2F3BAB1300731225 /* RecipePlanner */,
 				E1C138482F3BAB1600731225 /* RecipePlannerTests */,
 				E1C138522F3BAB1600731225 /* RecipePlannerUITests */,
@@ -109,9 +139,14 @@
 			);
 			fileSystemSynchronizedGroups = (
 				E1C1383A2F3BAB1300731225 /* RecipePlanner */,
+				E1C138EB2F3BCAAE00731225 /* Config */,
 			);
 			name = RecipePlanner;
 			packageProductDependencies = (
+				E1C138F82F3BCD0A00731225 /* FirebaseAnalytics */,
+				E1C138FA2F3BCD0A00731225 /* FirebaseAuth */,
+				E1C138FC2F3BCD0A00731225 /* FirebaseDatabase */,
+				E1C138FF2F3BCD4900731225 /* Kingfisher */,
 			);
 			productName = RecipePlanner;
 			productReference = E1C138382F3BAB1300731225 /* RecipePlanner.app */;
@@ -195,6 +230,10 @@
 			);
 			mainGroup = E1C1382F2F3BAB1300731225;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E1C138F72F3BCD0A00731225 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				E1C138FE2F3BCD4900731225 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E1C138392F3BAB1300731225 /* Products */;
 			projectDirPath = "";
@@ -390,6 +429,8 @@
 		};
 		E1C1385A2F3BAB1600731225 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = E1C138EB2F3BCAAE00731225 /* Config */;
+			baseConfigurationReferenceRelativePath = Debug.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -397,6 +438,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RecipePlanner/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -407,7 +449,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.company.RecipePlanner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Yerasyl.RecipePlannerApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -421,6 +463,8 @@
 		};
 		E1C1385B2F3BAB1600731225 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = E1C138EB2F3BCAAE00731225 /* Config */;
+			baseConfigurationReferenceRelativePath = Release.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -428,6 +472,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RecipePlanner/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -438,7 +483,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.company.RecipePlanner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Yerasyl.RecipePlannerApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -570,6 +615,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E1C138F72F3BCD0A00731225 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.9.0;
+			};
+		};
+		E1C138FE2F3BCD4900731225 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.6.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E1C138F82F3BCD0A00731225 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E1C138F72F3BCD0A00731225 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		E1C138FA2F3BCD0A00731225 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E1C138F72F3BCD0A00731225 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		E1C138FC2F3BCD0A00731225 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E1C138F72F3BCD0A00731225 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		E1C138FF2F3BCD4900731225 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E1C138FE2F3BCD4900731225 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E1C138302F3BAB1300731225 /* Project object */;
 }

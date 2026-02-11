@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SearchView: View {
     @StateObject private var viewModel: SearchViewModel
+    @FocusState private var isSearchFocused: Bool
     
     init() {
         let container = AppContainer.shared
@@ -10,10 +11,33 @@ struct SearchView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                SearchBar(text: $viewModel.searchQuery, placeholder: "Search for recipes...")
-                    .padding()
+            VStack(spacing: 0) {
+                // Prominent Search Bar
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.gray)
+                    
+                    TextField("Search for recipes...", text: $viewModel.searchQuery)
+                        .focused($isSearchFocused)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                    
+                    if !viewModel.searchQuery.isEmpty {
+                        Button {
+                            viewModel.searchQuery = ""
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(.gray)
+                        }
+                    }
+                }
+                .padding(12)
+                .background(Color(.systemGray6))
+                .cornerRadius(10)
+                .padding(.horizontal)
+                .padding(.vertical, 8)
                 
+                // Results
                 if viewModel.searchQuery.isEmpty {
                     EmptyStateView(
                         icon: "magnifyingglass",
@@ -47,6 +71,9 @@ struct SearchView: View {
                 }
             }
             .navigationTitle("Search")
+            .onAppear {
+                isSearchFocused = true
+            }
         }
     }
 }

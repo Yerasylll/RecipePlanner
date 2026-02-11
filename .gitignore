@@ -1,0 +1,35 @@
+# API Keys and Secrets
+Config/Secrets.xcconfig
+**/Secrets.xcconfig
+
+# Firebase
+GoogleService-Info.plist
+**/GoogleService-Info.plist
+
+# Xcode
+*.xcuserstate
+*.xcworkspace
+xcuserdata/
+DerivedData/
+*.xccheckout
+*.moved-aside
+
+# Swift Package Manager
+.swiftpm/
+.build/
+Packages/
+Package.resolved
+
+# CocoaPods
+Pods/
+*.xcworkspace
+Podfile.lock
+
+# macOS
+.DS_Store
+*.swp
+*~
+
+# Build
+build/
+Build/

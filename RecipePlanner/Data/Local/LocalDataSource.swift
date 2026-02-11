@@ -108,7 +108,7 @@ class LocalDataSource {
                 print("✅ Cleared \(oldEntities.count) old cached recipes")
             } catch {
                 print("❌ Error clearing old cache: \(error)")
-                            }
-                        }
-                    }
-                }
+            }
+        }
+    }
+}

@@ -3,6 +3,15 @@ import CoreData
 
 @objc(RecipeEntity)
 public class RecipeEntity: NSManagedObject {
+    
+}
+
+extension RecipeEntity {
+    
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<RecipeEntity> {
+        return NSFetchRequest<RecipeEntity>(entityName: "RecipeEntity")
+    }
+    
     @NSManaged public var id: Int64
     @NSManaged public var title: String?
     @NSManaged public var imageURL: String?
@@ -13,22 +22,24 @@ public class RecipeEntity: NSManagedObject {
     @NSManaged public var isFavorite: Bool
     @NSManaged public var timestamp: Date?
     
+}
+
+extension RecipeEntity : Identifiable {
+    
+    public var recipeId: Int {
+        return Int(id)
+    }
+    
     func toRecipe() -> Recipe {
         Recipe(
             id: Int(id),
-            title: title ?? "Unknown",
+            title: title ?? "Unknown Recipe",
             image: imageURL,
             summary: summary,
-            readyInMinutes: Int(readyInMinutes),
-            servings: Int(servings),
+            readyInMinutes: readyInMinutes > 0 ? Int(readyInMinutes) : nil,
+            servings: servings > 0 ? Int(servings) : nil,
             sourceUrl: sourceURL,
             isFavorite: isFavorite
         )
-    }
-}
-
-extension RecipeEntity {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<RecipeEntity> {
-        return NSFetchRequest<RecipeEntity>(entityName: "RecipeEntity")
     }
 }
